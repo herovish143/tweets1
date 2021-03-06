@@ -4,8 +4,9 @@ from django.http import HttpResponse, Http404, JsonResponse
 from .models import Tweet
 # Create your views here.
 def home_view(request, *args, **kwargs):
-    print(args, kwargs)
-    return HttpResponse("<h1>hello world</h1> Home Page")
+    # print(args, kwargs)
+    # return HttpResponse("<h1>hello world</h1> Home Page")
+    return render(request, "pages/home.html", context={}, status=200)
 
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
