@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 from django.http import HttpResponse
 
+from .models import Tweet
 # Create your views here.
 def home_view(request, *args, **kwargs):
     print(args, kwargs)
@@ -8,6 +9,10 @@ def home_view(request, *args, **kwargs):
 
 
 def tweet_detail_view(request, tweet_id, *args, **kwargs):
-    print(tweet_id, args, kwargs)
-    return HttpResponse(f"hello {tweet_id}")
+    # print(tweet_id, args, kwargs)
+    try:
+        tweet = Tweet.objects.get(id=tweet_id)
+    except:
+        raise Http404
+    return HttpResponse(f"{tweet_id} -{tweet.content}")
 
